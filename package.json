@@ -1,5 +1,5 @@
 {
-  "name": "Tripd",
+  "name": "Trippd",
   "version": "1.0.0",
   "description": "Takes the guesswork out of where your next vacation spot should be!",
   "main": "./client/index.js",
