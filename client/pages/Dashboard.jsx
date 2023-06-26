@@ -1,0 +1,1 @@
+// displays all known trips
