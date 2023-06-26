@@ -1,13 +1,13 @@
 {
-  "name": "",
+  "name": "Trippd",
   "version": "1.0.0",
-  "description": "",
+  "description": "Takes the guesswork out of where your next vacation spot should be!",
   "main": "./client/index.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack-dev-server --open",
     "build": "NODE_ENV=production webpack"
   },
-  "author": "",
+  "author": "Kai Farrell, Brisa Zhu, Aalayah Olaes, James Adler",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
