@@ -31,31 +31,26 @@ function RegisterPage() {
 
   return (
     <div className="register">
-      <div className="registerInput"></div>
-    </div>
-  );
-}
-export default RegisterPage;
-
-function LoginPage() {
-  return (
-    <div className="login">
-      <div className="loginInput">
+      <div className="registerInput">
         <p id="username">Username</p>
         <input type="text" name="username" id="username" />
         <p id="password">Password</p>
         <input type="text" name="password" id="password" />
         <button
-          className="loginButton"
-          id="loginButton"
-          onClick={() => verifyUser()}
+          className="newUserButton"
+          id="newUserButton"
+          onClick={() => newUser()}
         >
-          Login
-        </button>
-        <Link to="/register" className="newUser" id="newUser">
           Create Account
+        </button>
+        <Link to="/login" className="cancel" id="cancel">
+          <button className="cancelButton" id="cancelButton">
+            Cancel
+          </button>
         </Link>
       </div>
     </div>
   );
 }
+
+export default RegisterPage;
