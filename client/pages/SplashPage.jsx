@@ -3,15 +3,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
-// import LoginPage from './LoginPage.jsx';
+import '../style.css';
+import logo from '../assets/trippd_logo.png';
 
 function SplashPage(){
   return (
   // for returning a single div
-    <>
-      <h1>HELLO</h1>
-      <Link to='/register'> Register </Link>
-    </>
+    <div id = "splashwrapper">
+      <div id = "splashbuttonwrapper">
+        <Link to="/register">
+          <button className = "splashbutton">Register</button>
+        </Link>
+        <Link to="/login">
+          <button className = "splashbutton">Login</button>
+        </Link>
+      </div>
+      <div className = "logotitlewrapper">
+        <img id = "logo" src={logo}></img><p id = "splashtitle">trippd</p>
+      </div>
+    </div>
   );
 }
 export default SplashPage;
