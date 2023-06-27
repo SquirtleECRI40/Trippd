@@ -10,7 +10,7 @@ function SplashPage(){
   // for returning a single div
     <>
       <h1>HELLO</h1>
-
+      <Link to='/register'> Register </Link>
     </>
   );
 }

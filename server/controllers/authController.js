@@ -1,7 +1,7 @@
-import db from '../models/tripModel';
-import format from 'pg-format';
-import bcrypt from 'bcryptjs';
-import { useResolvedPath } from 'react-router';
+const db = require('../models/tripModel');
+// import format from 'pg-format';
+const bcrypt = require('bcryptjs');
+const { useResolvedPath } = require('react-router');
 
 const authController = {};
 
@@ -50,7 +50,7 @@ authController.login = async (req, res, next) => {
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
 
     if (isPasswordValid) {
-      res.loacls.message = 'Login successful';
+      res.locals.message = 'Login successful';
       return next();
     } else {
       res.locals.message = 'Invalid username or password';

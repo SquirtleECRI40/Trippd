@@ -1,10 +1,10 @@
-const express = require('express');
-const exampleController = require('../controllers/exampleController');
+// const express = require('express');
+// const tripController = require('../controllers/tripController');
 
-const tripRouter = express.Router();
+// const tripRouter = express.Router();
 
-tripRouter.get('/', exampleController.getMessage, (req, res) => {
-  res.status(200).json(res.locals.message);
-});
+// // tripRouter.get('/', tripController.getMessage, (req, res) => {
+// //   res.status(200).json(res.locals.message);
+// // });
 
-module.exports = tripRouter;
+// module.exports = tripRouter;

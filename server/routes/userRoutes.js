@@ -1,16 +1,16 @@
-import express from 'express';
-import authController from '../controllers/authController';
+const express = require('express');
+const authController = require('../controllers/authController');
 
 const usersRouter = express.Router();
 
 usersRouter.post('/register', authController.register, (req, res) => {
-  res.status(200).send({ message: 'Registration successful'});
+  res.sendStatus(200);
 });
 
 usersRouter.post('/login', authController.login, (req, res) => {
-  res.status(200).send({ message: 'Login successful.'});
+  res.sendStatus(200);
 });
 
 // add logout feature after?
 
-export default usersRouter;
+module.exports = usersRouter;

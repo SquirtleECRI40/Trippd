@@ -1,7 +1,7 @@
-import { Pool } from 'pg';
+const { Pool } = require('pg');
 
 const PG_URI =
-'postgres://rrscrbpl:isrL6N2W4N4W4Iq_gFZUg6BNI_JmY_pI@rajje.db.elephantsql.com/rrscrbpl'
+'postgres://rrscrbpl:isrL6N2W4N4W4Iq_gFZUg6BNI_JmY_pI@rajje.db.elephantsql.com/rrscrbpl';
 
 const pool = new Pool({
   connectionString: PG_URI,
@@ -14,4 +14,4 @@ const db = {
   }
 };
 
-export default db;
+module.exports = db;
