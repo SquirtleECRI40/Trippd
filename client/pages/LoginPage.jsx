@@ -1,10 +1,11 @@
 // displays for user to log in
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   //logic to verify username and password are valid
   const verifyUser = async () => {
@@ -22,6 +23,9 @@ function LoginPage() {
 
       if (!response.ok) throw new Error('Incorrect username or password');
       else if (response.ok) {
+        console.log(user);
+        setUser(username);
+        console.log(user);
         navigate('/dashboard');
       }
     } catch (err) {
