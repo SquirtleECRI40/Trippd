@@ -1,6 +1,6 @@
 // displays for user to log in
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,39 +12,45 @@ function LoginPage() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    try {
-      const response = await fetch('api/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: username, password: password }),
-      });
+    console.log('username is:', username);
 
-      if (!response.ok) throw new Error('Incorrect username or password');
-      else if (response.ok) {
-        console.log(user);
-        setUser(username);
-        console.log(user);
-        navigate('/dashboard');
-      }
-    } catch (err) {
-      console.log('Error:', err);
-    }
+    console.log(user);
+    setUser(username);
+    navigate(`/tripDashboard/${username}`);
+
+    // try {
+    //   const response = await fetch('api/user/login', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ username: username, password: password }),
+    //   });
+
+    //   if (!response.ok) throw new Error('Incorrect username or password');
+    //   else if (response.ok) {
+    //     console.log(user);
+    //     setUser(username);
+    //     console.log(user);
+    //     navigate('/dashboard');
+    //   }
+    // } catch (err) {
+    //   console.log('Error:', err);
+    // }
   };
+
+  // useEffect(() => {
+  //   console.log('hello', user);
+  // }, [user]);
 
   return (
     <div className="login">
       <div className="loginInput">
-        <p id="username">Username</p>
+        <p id="user">Username</p>
         <input type="text" name="username" id="username" />
-        <p id="password">Password</p>
+        <p id="pass">Password</p>
         <input type="text" name="password" id="password" />
-        <button
-          className="loginButton"
-          id="loginButton"
-          onClick={() => verifyUser()}
-        >
+        <button className="loginButton" id="loginButton" onClick={verifyUser}>
           Login
         </button>
         <Link to="/register" className="newUser" id="newUser">
