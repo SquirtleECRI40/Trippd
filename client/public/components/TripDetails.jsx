@@ -1,0 +1,1 @@
+// what shows when you click "details" on the trip card

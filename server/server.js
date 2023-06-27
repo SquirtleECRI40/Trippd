@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -9,7 +9,7 @@ const PORT = 3000;
 const mongoURI = '';
 
 // connect to mongo database
-if (mongoURI) mongoose.connect(mongoURI, { dbName: 'test'});
+// if (mongoURI) mongoose.connect(mongoURI, { dbName: 'test'});
 
 // require routers
 const apiRouter = require('./routes/api.js');
