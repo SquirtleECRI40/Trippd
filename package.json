@@ -2,7 +2,7 @@
   "name": "Trippd",
   "version": "1.0.0",
   "description": "Takes the guesswork out of where your next vacation spot should be!",
-  "main": "./client/index.js",
+  "main": "./client/index.jsx",
   "scripts": {
     "start": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack-dev-server --open",
     "build": "NODE_ENV=production webpack"
@@ -28,6 +28,7 @@
     "css-loader": "^6.7.3",
     "eslint": "^8.41.0",
     "eslint-plugin-react": "^7.32.2",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.1",
     "nodemon": "^2.0.22",
     "style-loader": "^3.3.3",

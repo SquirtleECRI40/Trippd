@@ -9,7 +9,7 @@ import DashboardPage from './pages/DashboardPage.jsx';
 import CreateTripPage from './pages/CreateTripPage.jsx';
 
 //TO DO: Could be redundant
-import Public from './public';
+// import Public from './public';
 
 //importing pages and components REQUIRED FOR ALL REACT COMPONENTS AND PAGES
 //usage: import <your page> from <file path>;
