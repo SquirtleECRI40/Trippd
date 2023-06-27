@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function CreateTripComponent(){
+function CreateTripPage(){
 
 }
-export default CreateTripComponent;
+export default CreateTripPage;
