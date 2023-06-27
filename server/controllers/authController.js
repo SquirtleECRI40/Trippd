@@ -50,6 +50,7 @@ authController.login = async (req, res, next) => {
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
 
     if (isPasswordValid) {
+      res.locals.username = username;
       res.locals.message = 'Login successful';
       return next();
     } else {

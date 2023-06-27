@@ -22,7 +22,7 @@ function LoginPage() {
 
       if (!response.ok) throw new Error('Incorrect username or password');
       else if (response.ok) {
-        navigate('/dashboard');
+        navigate('/dashboard', {});
       }
     } catch (err) {
       console.log('Error:', err);

@@ -12,19 +12,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //request to router
-// app.use("/api/trip", tripRouter);
-app.use("/api/users", usersRouter);
+app.use('/api/trip', tripRouter);
+app.use('/api/users', usersRouter);
 
 //catch-all route handler for any requests
 
-app.use((req, res) => {res.status(404).send("This page does not exist")});
+app.use((req, res) => {res.status(404).send('This page does not exist')});
 
 //express error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: "Express error handler caught unknown middleware error",
+    log: 'Express error handler caught unknown middleware error',
     status: 400,
-    message: { err: "An error occurred" },
+    message: { err: 'An error occurred' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
