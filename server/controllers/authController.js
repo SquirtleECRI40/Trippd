@@ -1,6 +1,7 @@
 import db from '../models/tripModel';
 import format from 'pg-format';
 import bcrypt from 'bcryptjs';
+import { useResolvedPath } from 'react-router';
 
 const authController = {};
 
@@ -35,10 +36,29 @@ authController.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    
-  } catch (err) {
+    // retreive user from the db based on the username 
+    const getUserQuery = 'SELECT * FROM users WHERE username = $1';
+    const user = await db.query(getUserQuery, [username]);
 
+    // check if the user exists 
+    if (user.rows.length === 0) {
+      return res.json({message: 'Invalid username or password'});
+    } 
+
+    // compare provided password with hashed password
+    const hashedPassword = user.rows[0].password;
+    const isPasswordValid = await bcrypt.compare(password, hashedPassword);
+
+    if (isPasswordValid) {
+      res.loacls.message = 'Login successful';
+      return next();
+    } else {
+      res.locals.message = 'Invalid username or password';
+      return next();
+    }
+  } catch (err) {
+    return next({ log: `Error in login ${err}`});
   }
-}
+};
 
 module.exports = authController;

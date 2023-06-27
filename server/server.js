@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import tripRouter from './routes/tripRoutes';
+import usersRouter from './routes/userRoutes';
 
 const app = express();
 
@@ -12,7 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //request to router
-app.use('/trip', tripRouter);
+app.use('/api/trip', tripRouter);
+app.use('/api/users', usersRouter);
 
 //catch-all route handler for any requests
 
