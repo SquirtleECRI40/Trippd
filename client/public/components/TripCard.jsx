@@ -1,0 +1,1 @@
+// individual trip cards to show on the dashboard

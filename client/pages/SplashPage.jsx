@@ -3,19 +3,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
+// import LoginPage from './LoginPage.jsx';
 
-function SplashComponent(){
+function SplashPage(){
   return (
   // for returning a single div
     <>
-      <Routes>
-        <Route path = "/" element = {<SplashPage />} />
-        <Route path = "/login" element = {<LoginPage />} />
-        <Route path = "/register" element = {<RegisterPage />} />
-        <Route path = "/tripDashboard" element = {<DashboardPage/>} />
-        <Route path = "/createTrip" element = {<CreateTripPage/>} />
-      </Routes>
+      <h1>HELLO</h1>
     </>
   );
 }
-export default SplashComponent;
+export default SplashPage;
