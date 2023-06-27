@@ -4,11 +4,11 @@ import bcrypt from 'bcryptjs';
 
 const authController = {};
 
-authController.register = async (req, res, next) {
+authController.register = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    // check if username already exists 
+    // check if username already exists
     const existingUserQuery = 'SELECT * FROM users WHERE username = $1';
     const existingUser = await db.query(existingUserQuery, [username]);
 
@@ -21,13 +21,24 @@ authController.register = async (req, res, next) {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // insert the new user into the database
-    const insertUserQuery = 'INSERT INTO users (username, password) VALUES ($1, $2)';
+    const insertUserQuery =
+      'INSERT INTO users (username, password) VALUES ($1, $2)';
     await db.query(insertUserQuery, [username, hashedPassword]);
 
     return next();
   } catch (err) {
-      return next({ log: `Error in registration: ${err}`});
+    return next({ log: `Error in registration: ${err}` });
   }
 };
+
+authController.login = async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+
+    
+  } catch (err) {
+
+  }
+}
 
 module.exports = authController;
