@@ -4,7 +4,8 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-function LoginComponent() {
+function LoginPage() {
+  console.log('in login page');
   const navigate = useNavigate();
   //logic to verify username and password are valid
   const verifyUser = async () => {
@@ -46,8 +47,7 @@ function LoginComponent() {
         </Link>
       </div>
     </div>
-  )
-
+  );
 }
 
-export default LoginComponent;
+export default LoginPage;
