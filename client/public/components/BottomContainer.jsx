@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import TripCard from './TripCard.jsx';
 
 function BottomContainer(data) {
-  const { username } = useParams();
-  console.log('username is:', username);
-  useEffect(() => {
-    console.log('data is:', data.data);
-  }, []);
+  //array to contain all trip cards
+  const tripsArray = [];
+
+  //iterate through data to create unique trip cards
+  for (let i = 0; i < data.data.length; i++) {
+    tripsArray.push(<TripCard key={i} trip={data.data[i]} />);
+  }
+
   return data.data.length === 0 ? (
     <div>
       <p>Create trip to get started!</p>
@@ -17,7 +21,10 @@ function BottomContainer(data) {
       </Link>
     </div>
   ) : (
-    <div></div>
+    <div>
+      <p>Your Trips</p>
+      {tripsArray}
+    </div>
   );
 }
 
