@@ -41,7 +41,7 @@ tripController.getTrips = async (req, res, next) => {
       t.end_date AS end_date, 
       t.notes AS notes
     FROM 
-      users u,
+      users u
     INNER JOIN 
       trips t ON t._id = ANY(u.trips)
     INNER JOIN 
