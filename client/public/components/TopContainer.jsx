@@ -14,7 +14,11 @@ function TopContainer(data) {
       <p>Hi {username}, welcome back!</p>
       <div>
         <p>New Trip???</p>
-        <button>Create</button>
+        <Link to="/createTrip" className="create" id="create">
+          <button className="newTripButton" id="newTripButton">
+            Create New Trip
+          </button>
+        </Link>
       </div>
     </div>
   );
