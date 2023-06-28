@@ -5,43 +5,32 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const navigate = useNavigate();
   //logic to verify username and password are valid
   const verifyUser = async () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    try {
+      const response = await fetch('api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: username, password: password }),
+      });
 
-    console.log('username is:', username);
-
-    console.log(user);
-    setUser(username);
-    navigate(`/tripDashboard/${username}`);
-
-    // try {
-    //   const response = await fetch('api/user/login', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ username: username, password: password }),
-    //   });
-
-    //   if (!response.ok) throw new Error('Incorrect username or password');
-    //   else if (response.ok) {
-    //     console.log(user);
-    //     setUser(username);
-    //     console.log(user);
-    //     navigate('/dashboard');
-    //   }
-    // } catch (err) {
-    //   console.log('Error:', err);
-    // }
+      if (!response.ok) throw new Error('Incorrect username or password');
+      else if (response.ok) {
+        // console.log(user);
+        // setUser(username);
+        // console.log(user);
+        navigate(`/tripDashboard/${username}`);
+      }
+    } catch (err) {
+      console.log('Error:', err);
+    }
   };
-
-  // useEffect(() => {
-  //   console.log('hello', user);
-  // }, [user]);
 
   return (
     <div className="login">
