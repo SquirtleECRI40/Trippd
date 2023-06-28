@@ -12,7 +12,7 @@ function RegisterPage() {
     const password = document.getElementById('password').value;
 
     try {
-      const response = await fetch('api/user/register', {
+      const response = await fetch('api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
