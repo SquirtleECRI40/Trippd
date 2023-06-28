@@ -38,7 +38,7 @@ function LoginPage() {
         <p id="user">Username</p>
         <input type="text" name="username" id="username" />
         <p id="pass">Password</p>
-        <input type="text" name="password" id="password" />
+        <input type="password" name="password" id="password" />
         <button className="loginButton" id="loginButton" onClick={verifyUser}>
           Login
         </button>
