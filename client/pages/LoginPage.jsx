@@ -22,6 +22,7 @@ function LoginPage() {
 
       if (!response.ok) throw new Error('Incorrect username or password');
       else if (response.ok) {
+
         // console.log(user);
         // setUser(username);
         // console.log(user);
