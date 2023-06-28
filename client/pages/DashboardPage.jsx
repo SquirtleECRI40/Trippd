@@ -16,7 +16,7 @@ function DashboardPage() {
     setTrips(data);
   }
 
-  useEffect(() => {
+  useEffect(() => { 
     //getData();
     // setTrips(['here']);
   }, []);
