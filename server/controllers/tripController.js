@@ -22,8 +22,8 @@ trips
 _id - INT - serial/required
 title - varchar - required
 location - INT - required 
-start date - varchar - not required 
-end date - varchar - not required 
+start_date - varchar - not required 
+end_date - varchar - not required 
 notes - varchar - not required 
 */
 
@@ -66,7 +66,6 @@ tripController.getTrips = async (req, res, next) => {
 
 tripController.addTrip = async (req, res, next) => {
   const { title, start_location, location, start_date, end_date, notes } = req.body;
-
   try {
     // check if location exists in location table 
     const checkLocationQuery = 'SELECT * FROM locations WHERE location = $1';
@@ -79,17 +78,18 @@ tripController.addTrip = async (req, res, next) => {
     }
 
     //get location of the newly added location
-    const getLocationIdQuery = 'SELECT id FROM locations WHERE location = $1';
+    const getLocationIdQuery = 'SELECT _id FROM locations WHERE location = $1';
     const locationIdResult = await db.query(getLocationIdQuery, [location]);
-    const locationId = locationIdResult.rows[0].id;
+    const locationId = locationIdResult.rows[0]._id;
+
 
     //add trips to trip table
-    const addTripQuery = 'INSER INTO trips (title, start_location, locationId, start_date, end_date, notes';
-    await db.query(addTripQuery, [title, start_location, locationId, start_date, end_date, notes]);
+    const addTripQuery = 'INSERT INTO trips (title, start_location, location, start_date, end_date, notes) VALUES ($1, $2, (SELECT _id FROM locations WHERE location = $3), $4, $5, $6)';
+    await db.query(addTripQuery, [title, start_location, location, start_date, end_date, notes]);
 
     //update the users trips column in the users table
-    const userId = req.user.id;
-    const updateUserQuery = 'UPDATE users SET trips = array_append(trips, $1 WHERE _id = $2';
+    const userId = req.params.id;
+    const updateUserQuery = 'UPDATE users SET trips = array_append(trips, $1) WHERE _id = $2';
     await db.query(updateUserQuery, [locationId, userId]);
 
     return next();
@@ -99,13 +99,13 @@ tripController.addTrip = async (req, res, next) => {
 };
 
 tripController.deleteTrip = async (req, res, next) => {
-  const tripId = res.parmams.tripId;
+  const tripId = res.params.tripId;
 
   try {
     // reteive users trips array 
-    const userId = req.user.id;
+    const userId = req.params.id;
     const getUserTripsQuery = 'SELECT trips FROM users WHERE _id = $1';
-    const userTripsResult = await db.query(getUserTripsQuery, [userId]);
+    await db.query(getUserTripsQuery, [userId]);
     const userTrips = userTrips.row[0].trips;
 
     // check if trip exists in the user's trip array 
