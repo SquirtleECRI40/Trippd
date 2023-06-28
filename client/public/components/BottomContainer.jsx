@@ -23,9 +23,11 @@ function BottomContainer(data) {
       </Link>
     </div>
   ) : (
-    <div>
-      <p>Your Trips</p>
-      {tripsArray}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+      <p style={{fontSize: '20px'}}>Your Trips: </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+        {tripsArray}
+      </div>
     </div>
   );
 }

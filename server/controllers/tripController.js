@@ -62,14 +62,14 @@ tripController.getTrips = async (req, res, next) => {
 
   try {
     const tripsResult = await db.query(tripQuery, [username]);
-    console.log(tripsResult);
+    //console.log(tripsResult);
     const tripsArray = tripsResult.rows[0].trips;
-    console.log(tripsArray);
+    //console.log(tripsArray);
 
     const tripsData = await db.query(joinTripsQuery, [tripsArray]);
-    console.log('trips data', tripsData);
+    //console.log('trips data', tripsData);
     const tripRows = tripsData.rows;
-    console.log('TRIP ROWS IS:', tripRows);
+    //console.log('TRIP ROWS IS:', tripRows);
 
     // const processedTrips = tripsData.map((trip) => {
     //   return {
@@ -99,6 +99,7 @@ tripController.addTrip = async (req, res, next) => {
   const { title, start_location, location, start_date, end_date, notes } =
     req.body;
   const username = req.params.username;
+  console.log('ENTERED POST REQUEST YO!');
 
   try {
     // check if location exists in location table
