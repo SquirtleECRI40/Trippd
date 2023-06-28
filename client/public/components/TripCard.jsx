@@ -7,7 +7,7 @@ const TripCard = (props) => {
   const { name, startLocation, endLocation, startDate, endDate } = props;
 
   return (
-    <div className='trip-card'>
+    <div className="trip-card">
       <h3>{name}</h3>
       <h3>
         {startLocation} to {endLocation}
@@ -15,7 +15,9 @@ const TripCard = (props) => {
       <h3>
         {startDate} to {endDate}
       </h3>
-      <button className = 'details-button'>More Details</button>
+      <button className="details-button">More Details</button>
     </div>
   );
 };
+
+export default TripCard;
