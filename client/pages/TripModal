@@ -4,7 +4,7 @@ import axios from 'axios';
 const TripModal = (props) => {
   const {
     closeModal,
-    id,
+    _id,
     name,
     startLocation,
     endLocation,
@@ -36,7 +36,7 @@ const TripModal = (props) => {
     // Perform the logic to send the PUT request with the updated values
     // ...
     const updatedTrip = {
-      id: id,
+      _id: _id,
       name: editedName,
       startLocation: editedStartLocation,
       endLocation: editedEndLocation,
@@ -44,12 +44,16 @@ const TripModal = (props) => {
       endDate: editedEndDate,
       notes: editedNotes,
     };
-
-    // this the wrong id lol TO DO 
-    const response = await axios.post(`localhost3000/api/trip/update${id}`)
-
-    // After the PUT request is successful, you can close the modal
-    setIsEditMode(false);
+    try {
+      const response = await axios.put(`/api/trip/update${_id}`,updatedTrip);
+      if (response.ok) {
+        setIsEditMode(false);
+      } else {
+        throw new Error('Error: Could not update');
+      }
+    } catch (error) {
+      console.log(`error: ${error}`);
+    }
   };
 
   const handleCancelClick = () => {
