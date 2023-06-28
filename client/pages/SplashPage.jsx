@@ -3,7 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
-import '../style.css';
+import '../styles/style.css';
 import logo from '../assets/trippd_logo.png';
 
 function SplashPage(){
@@ -16,6 +16,9 @@ function SplashPage(){
         </Link>
         <Link to="/login">
           <button className = "splashbutton">Login</button>
+        </Link>
+        <Link to="/createTrip">
+          <button className = "splashbutton">Create Trip</button>
         </Link>
       </div>
       <div className = "logotitlewrapper">

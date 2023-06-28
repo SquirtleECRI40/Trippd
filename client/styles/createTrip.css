@@ -8,15 +8,36 @@ p {
     font-family: var(--font-family);
 }
 
-body {
-    /* margin: auto; */
+/* body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: auto;
     background: linear-gradient(315deg, rgb(200, 200, 200) 3%, var(--baseblue) 38%, rgb(1, 8, 212) 98%);
     animation: gradient 30s ease infinite;
     background-size: 300% 200%;
     background-attachment: fixed;
+} */
+
+/* #notes {
+    width: 20em;
+    height: 10em;
+} */
+
+.createTripFormWrapper{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    margin-top: 10em;
+    background-color: var(--bluewhite);
+    padding: 20%;
 }
+
+input, select, textarea {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
 
 @keyframes gradient {
     0% {
@@ -51,54 +72,6 @@ body {
         transform: translateX(1);
     }
 }
-
-#logo{
-    width: 6em;
-    height: auto;
-    margin: 20px;
-}
-
-.logotitlewrapper{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 10em;
-}
-
-#splashtitle {
-    font-size: 6em;
-    color: var(--bluewhite);
-    margin: 0px;
-    text-shadow: 3px 3px var(--baseblue);
-}
-
-#splashwrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#splashbuttonwrapper{
-    align-self: flex-end;
-}
-
-.splashbutton {
-    background-color: var(--baseblue);
-    border-radius: 10px;
-    border: solid;
-    color: var(--bluewhite);
-    padding: .75em 1.5em;
-    text-align: center;
-    display: inline-block;
-    font-size: .75em;
-    margin: 1em .5em;
-    cursor: pointer;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    font-family: var(--font-family);
-  }
-
 
 /* all buttons */
 
