@@ -25,6 +25,9 @@ module.exports = {
       '/api': 'http://localhost:3000'
     }
   },
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
   module: {
     rules: [
       // babel loaders
