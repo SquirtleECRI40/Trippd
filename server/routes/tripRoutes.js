@@ -4,10 +4,10 @@ const tripController = require('../controllers/tripController');
 const tripRouter = express.Router();
 
 tripRouter.get('/:username', tripController.getTrips, (req, res) => {
-  res.sendStatus(200).json(res.locals.message);
+  res.status(200).json(res.locals.trips);
 });
 
-tripRouter.post('/:username', tripController.addTrip, (req, res) => {
+tripRouter.post('/createTrip/:username', tripController.addTrip, (req, res) => {
   res.sendStatus(200);
 });
 

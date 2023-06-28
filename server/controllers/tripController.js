@@ -26,47 +26,64 @@ start_date - varchar - not required
 end_date - varchar - not required 
 notes - varchar - not required 
 */
+  // const tripQuery = `
+  //   SELECT 
+  //     t._id AS trip_id,
+  //     t.title AS title,
+  //     t.start_location AS start_location,
+  //     l.location AS location,
+  //     t.start_date AS start_date, 
+  //     t.end_date AS end_date, 
+  //     t.notes AS notes
+  //   FROM 
+  //     trips t
+  //   INNER JOIN 
+  //     locations l ON t.location = l._id
+  //   INNER JOIN 
+  //     users u ON t._id = ANY(u.trips)
+  //   WHERE
+  //     u.username = $1;
+  // `;
 
 tripController.getTrips = async (req, res, next) => {
 
   const username = req.params.username;
+  console.log(username);
 
   const tripQuery = `
     SELECT 
-      t._id AS trip_id,
-      t.title AS title,
-      t.start_location AS start_location,
-      l.location AS location,
-      t.start_date AS start_date, 
-      t.end_date AS end_date, 
-      t.notes AS notes
-    FROM 
-      users u,
-    INNER JOIN 
-      trips t ON t._id = ANY(u.trips)
-    INNER JOIN 
-      locations l ON t.location = l._id
+      trips
+    FROM
+      users
     WHERE
-      u.username = $1;
+      username = $1
   `;
+
+  const joinTripsQuery = 'SELECT * FROM trips WHERE _ID = ANY($1)';
 
   try {
     const tripsResult = await db.query(tripQuery, [username]);
-    const trips = tripsResult.rows;
+    console.log(tripsResult);
+    const tripsArray = tripsResult.rows[0].trips;
+    console.log(tripsArray);
 
-    const processedTrips = trips.map((trip) => {
-      return {
-        trip_id: trip.trip_id,
-        title: trip.title,
-        start_location: trip.start_location,
-        location: trip.location,
-        start_date: trip.start_date,
-        end_date: trip.end_date,
-        notes: trip.notes,
-      };
-    });
+    const tripsData = await db.query(joinTripsQuery, [tripsArray]);
+    console.log('trips data', tripsData);
+    const tripRows = tripsData.rows;
 
-    res.locals.trips = processedTrips;
+    // const processedTrips = tripsData.map((trip) => {
+    //   return {
+    //     trip_id: trip.trip_id,
+    //     title: trip.title,
+    //     start_location: trip.start_location,
+    //     location: trip.location,
+    //     start_date: trip.start_date,
+    //     end_date: trip.end_date,
+    //     notes: trip.notes,
+    //   };
+    // });
+
+    res.locals.trips = tripRows;
     return next();
   } catch (err) {
     return next({
@@ -77,8 +94,9 @@ tripController.getTrips = async (req, res, next) => {
   }
 };
 
+
+
 tripController.addTrip = async (req, res, next) => {
-  console.log("req params: ", req.params);
   const { title, start_location, location, start_date, end_date, notes } = req.body;
   const username = req.params.username;
 
