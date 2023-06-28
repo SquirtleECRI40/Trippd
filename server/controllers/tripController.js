@@ -89,10 +89,46 @@ tripController.addTrip = async (req, res, next) => {
 
     //update the users trips column in the users table
     const userId = req.user.id;
-    const updateUserQuery = 'UPDATE users SET trips = array'
-  } catch(err) {
+    const updateUserQuery = 'UPDATE users SET trips = array_append(trips, $1 WHERE _id = $2';
+    await db.query(updateUserQuery, [locationId, userId]);
 
+    return next();
+  } catch(err) {
+    return next({ log: `Error in adding trip: ${err}`});
   }
-}
+};
+
+tripController.deleteTrip = async (req, res, next) => {
+  const tripId = res.parmams.tripId;
+
+  try {
+    // reteive users trips array 
+    const userId = req.user.id;
+    const getUserTripsQuery = 'SELECT trips FROM users WHERE _id = $1';
+    const userTripsResult = await db.query(getUserTripsQuery, [userId]);
+    const userTrips = userTrips.row[0].trips;
+
+    // check if trip exists in the user's trip array 
+    const tripIndex = userTrips.indexOf(tripId);
+    if (tripIndex === -1) {
+      return next({ status: 404, message: 'Trip not found.'});
+    }
+
+    // remove the trip from the user's trips array 
+    userTrips.splice(tripIndex, 1);
+
+    //update the users trips array in the users table
+    const updateUserTripsQuery = 'UPDATE users SET trips = $1 WHERE _id = $2';
+    await db.query(updateUserTripsQuery, [userTrips, userId]);
+
+    // delete trip from trips table
+    const deleteTripQuery = 'DELETE FROM trips WHERE _id = $1';
+    await db.query(deleteTripQuery, [tripId]);
+
+    return next();
+  } catch(err) {
+    return next({ log: `Error in deleting trip ${err}`});
+  }
+};
 
 module.exports = tripController;

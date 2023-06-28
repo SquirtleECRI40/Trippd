@@ -1,10 +1,18 @@
-// const express = require('express');
-// const tripController = require('../controllers/tripController');
+const express = require('express');
+const tripController = require('../controllers/tripController');
 
-// const tripRouter = express.Router();
+const tripRouter = express.Router();
 
-// // tripRouter.get('/', tripController.getMessage, (req, res) => {
-// //   res.status(200).json(res.locals.message);
-// // });
+tripRouter.get('/', tripController.getTrips, (req, res) => {
+  res.status(200).json(res.locals.message);
+});
 
-// module.exports = tripRouter;
+tripRouter.post('/createTrip', tripController.addTrip, (req, res) => {
+  res.status(200);
+});
+
+tripRouter.delete('/deleteTrip', tripController.deleteTrip, (req, res) => {
+  res.status(200);
+});
+
+module.exports = tripRouter;
