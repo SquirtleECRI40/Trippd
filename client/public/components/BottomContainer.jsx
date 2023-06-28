@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import TripCard from './TripCard.jsx';
 
 function BottomContainer(data) {
-  const { username } = useParams();
-  console.log(data.data);
+  const {username} = useParams();
+  console.log('in bottom container: ', username);
   //array to contain all trip cards
   const tripsArray = [];
 

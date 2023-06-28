@@ -95,6 +95,7 @@ tripController.getTrips = async (req, res, next) => {
 };
 
 tripController.addTrip = async (req, res, next) => {
+  console.log("!!!!!!!!!!!IN ADD TRIP!!!!!!!!!!!!")
   const { title, start_location, location, start_date, end_date, notes } =
     req.body;
   const username = req.params.username;
