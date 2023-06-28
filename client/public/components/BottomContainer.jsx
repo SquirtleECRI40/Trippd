@@ -10,16 +10,14 @@ function BottomContainer(data) {
   return data.data.length === 0 ? (
     <div>
       <p>Create trip to get started!</p>
-      <button>Create</button>
+      <Link to="/createTrip" className="create" id="create">
+        <button className="newTripButton" id="newTripButton">
+          Create New Trip
+        </button>
+      </Link>
     </div>
   ) : (
-    <div>
-      <p>Hi {username}, welcome back!</p>
-      <div>
-        <p>New Trip???</p>
-        <button>Create</button>
-      </div>
-    </div>
+    <div></div>
   );
 }
 
