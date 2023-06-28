@@ -8,6 +8,8 @@ const authController = {};
 authController.register = async (req, res, next) => {
   try {
     const { username, password } = req.body;
+    console.log('username is:', username);
+    console.log('password is:', password);
 
     // check if username already exists
     const existingUserQuery = 'SELECT * FROM users WHERE username = $1';
@@ -36,14 +38,14 @@ authController.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    // retreive user from the db based on the username 
+    // retreive user from the db based on the username
     const getUserQuery = 'SELECT * FROM users WHERE username = $1';
     const user = await db.query(getUserQuery, [username]);
 
-    // check if the user exists 
+    // check if the user exists
     if (user.rows.length === 0) {
-      return res.json({message: 'Invalid username or password'});
-    } 
+      return res.json({ message: 'Invalid username or password' });
+    }
 
     // compare provided password with hashed password
     const hashedPassword = user.rows[0].password;
@@ -58,7 +60,7 @@ authController.login = async (req, res, next) => {
       return next();
     }
   } catch (err) {
-    return next({ log: `Error in login ${err}`});
+    return next({ log: `Error in login ${err}` });
   }
 };
 
