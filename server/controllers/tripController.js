@@ -65,6 +65,7 @@ tripController.getTrips = async (req, res, next) => {
 };
 
 tripController.addTrip = async (req, res, next) => {
+  console.log("req params: ", req.params);
   const { title, start_location, location, start_date, end_date, notes } = req.body;
   try {
     // check if location exists in location table 
