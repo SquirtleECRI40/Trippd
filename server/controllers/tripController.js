@@ -42,9 +42,8 @@ tripController.getTrips = async (req, res, next) => {
       t.notes AS notes
     FROM 
       users u,
-      unnest(u.trips) AS trip_id
     INNER JOIN 
-      trips t ON trip_id = t.id
+      trips t ON t._id = ANY(u.trips)
     INNER JOIN 
       locations l ON t.location = l._id
     WHERE
@@ -52,8 +51,22 @@ tripController.getTrips = async (req, res, next) => {
   `;
 
   try {
-    const trips = await db.query(tripQuery, [username]);
-    res.locals.trips = await trips.rows;
+    const tripsResult = await db.query(tripQuery, [username]);
+    const trips = tripsResult.rows;
+
+    const processedTrips = trips.map((trip) => {
+      return {
+        trip_id: trip.trip_id,
+        title: trip.title,
+        start_location: trip.start_location,
+        location: trip.location,
+        start_date: trip.start_date,
+        end_date: trip.end_date,
+        notes: trip.notes,
+      };
+    });
+
+    res.locals.trips = processedTrips;
     return next();
   } catch (err) {
     return next({
@@ -66,6 +79,8 @@ tripController.getTrips = async (req, res, next) => {
 
 tripController.addTrip = async (req, res, next) => {
   const { title, start_location, location, start_date, end_date, notes } = req.body;
+  const username = req.params.username;
+
   try {
     // check if location exists in location table 
     const checkLocationQuery = 'SELECT * FROM locations WHERE location = $1';
@@ -73,24 +88,33 @@ tripController.addTrip = async (req, res, next) => {
 
     // if location doesnt exist add to the loaction table
     if (existingLocation.rows.length === 0) {
-      const addLocationQuery = 'INSERT INTO locations (location) VALUES ($1)';
-      await db.query(addLocationQuery, [location]);
+      const addLocationQuery = 'INSERT INTO locations (location) VALUES ($1) RETURNING _id';
+      const insertedLocation = await db.query(addLocationQuery, [location]);
+      let locationId = insertedLocation.rows[0]._id;
+    } else {
+      let locationId = existingLocation.rows[0]._id;
     }
 
     //get location of the newly added location
-    const getLocationIdQuery = 'SELECT _id FROM locations WHERE location = $1';
-    const locationIdResult = await db.query(getLocationIdQuery, [location]);
-    const locationId = locationIdResult.rows[0]._id;
+    // const getLocationIdQuery = 'SELECT _id FROM locations WHERE location = $1';
+    // const locationIdResult = await db.query(getLocationIdQuery, [location]);
 
 
     //add trips to trip table
-    const addTripQuery = 'INSERT INTO trips (title, start_location, location, start_date, end_date, notes) VALUES ($1, $2, (SELECT _id FROM locations WHERE location = $3), $4, $5, $6)';
-    await db.query(addTripQuery, [title, start_location, location, start_date, end_date, notes]);
+    const addTripQuery = 
+    'INSERT INTO trips (title, start_location, location, start_date, end_date, notes) VALUES ($1, $2, $3, $4, $5, $6) RETURNING _id';
+    const insertTrip = await db.query(addTripQuery, 
+      [title, 
+        start_location,
+        location,
+        start_date, 
+        end_date, 
+        notes]);
+    const tripId = insertTrip.rows[0]._id;
 
     //update the users trips column in the users table
-    const userId = req.params.id;
-    const updateUserQuery = 'UPDATE users SET trips = array_append(trips, $1) WHERE _id = $2';
-    await db.query(updateUserQuery, [locationId, userId]);
+    const updateUserQuery = 'UPDATE users SET trips = array_append(trips, $1) WHERE username = $2';
+    await db.query(updateUserQuery, [tripId, username]);
 
     return next();
   } catch(err) {
@@ -99,14 +123,15 @@ tripController.addTrip = async (req, res, next) => {
 };
 
 tripController.deleteTrip = async (req, res, next) => {
-  const tripId = res.params.tripId;
-
+  const tripId = req.params.tripId;
+  const username = req.params.username;
+  console.log(tripId);
   try {
     // reteive users trips array 
-    const userId = req.params.id;
-    const getUserTripsQuery = 'SELECT trips FROM users WHERE _id = $1';
-    await db.query(getUserTripsQuery, [userId]);
-    const userTrips = userTrips.row[0].trips;
+    const getUserTripsQuery = 'SELECT trips FROM users WHERE username = $1';
+    const userTripsResult = await db.query(getUserTripsQuery, [username]);
+    console.log(userTripsResult);
+    const userTrips = userTripsResult.rows[0].trips;
 
     // check if trip exists in the user's trip array 
     const tripIndex = userTrips.indexOf(tripId);
@@ -118,8 +143,8 @@ tripController.deleteTrip = async (req, res, next) => {
     userTrips.splice(tripIndex, 1);
 
     //update the users trips array in the users table
-    const updateUserTripsQuery = 'UPDATE users SET trips = $1 WHERE _id = $2';
-    await db.query(updateUserTripsQuery, [userTrips, userId]);
+    const updateUserTripsQuery = 'UPDATE users SET trips = $1 WHERE username = $2';
+    await db.query(updateUserTripsQuery, [userTrips, username]);
 
     // delete trip from trips table
     const deleteTripQuery = 'DELETE FROM trips WHERE _id = $1';
