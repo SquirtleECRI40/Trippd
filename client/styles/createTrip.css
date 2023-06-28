@@ -25,7 +25,8 @@ p {
 .createTripFormWrapper{
     display: flex;
     /* flex-direction: column; */
-    margin: 4em;
+    justify-content: center;
+    margin: 7em;
     background-color: var(--bluewhite);
     border-radius: 40px;
     padding: 10%;
@@ -34,9 +35,7 @@ p {
 form {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
-    border: 4px solid red;
 }
 
 input, select, textarea {
