@@ -17,12 +17,12 @@ function SplashPage(){
         <Link to="/login">
           <button className = "splashbutton">Login</button>
         </Link>
-        <Link to="/createTrip">
+        {/* <Link to="/createTrip">
           <button className = "splashbutton">Create Trip</button>
         </Link>
         <Link to="/tripDashboard/1">
           <button className = "splashbutton">Trip Dashboard</button>
-        </Link>
+        </Link> */}
       </div>
       <div className = "logotitlewrapper">
         <img id = "logo" src={logo}></img><p id = "splashtitle">trippd</p>

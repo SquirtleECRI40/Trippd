@@ -4,6 +4,7 @@ import TripCard from './TripCard.jsx';
 
 function BottomContainer(data) {
   const {username} = useParams();
+  console.log('in bottom container: ', username);
   //array to contain all trip cards
   const tripsArray = [];
 
@@ -15,7 +16,8 @@ function BottomContainer(data) {
   return data.data.length === 0 ? (
     <div>
       <p>Create trip to get started!</p>
-      <Link to={`/createTrip/${username}`} className="create" id="create">
+      {/* <Link to={`/createTrip/${username}`} className="create" id="create"> */}
+      <Link to={`tripDashboard/${username}/create`} className="create" id="create">
         <button className="newTripButton" id="newTripButton">
           Create New Trip
         </button>

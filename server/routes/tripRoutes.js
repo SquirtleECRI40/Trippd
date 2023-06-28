@@ -7,7 +7,7 @@ tripRouter.get('/:username', tripController.getTrips, (req, res) => {
   res.sendStatus(200).json(res.locals.message);
 });
 
-tripRouter.post('/:username', tripController.addTrip, (req, res) => {
+tripRouter.post('/createTrip/:username', tripController.addTrip, (req, res) => {
   res.sendStatus(200);
 });
 
