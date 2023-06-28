@@ -1,0 +1,103 @@
+:root {
+    --font-family: 'DM Sans', sans-serif;
+    --baseblue: #077BCC;
+    --bluewhite:rgb(196, 217, 255);
+}
+
+p {
+    font-family: var(--font-family);
+}
+
+/* body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: auto;
+    background: linear-gradient(315deg, rgb(200, 200, 200) 3%, var(--baseblue) 38%, rgb(1, 8, 212) 98%);
+    animation: gradient 30s ease infinite;
+    background-size: 300% 200%;
+    background-attachment: fixed;
+} */
+
+/* #notes {
+    width: 20em;
+    height: 10em;
+} */
+
+.createTripFormWrapper{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    margin: 7em;
+    background-color: var(--bluewhite);
+    border-radius: 40px;
+    padding: 10%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, select, textarea {
+    font-family: var(--font-family);
+    width: 80%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+  }
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+
+/* all buttons */
+
+button {
+    background-color: var(--baseblue); /* Green */
+    border-radius: 10px;
+    border: solid;
+    color: var(--bluewhite);
+    padding: .75em 1.5em;
+    display: inline-block;
+    font-size: .75em;
+    margin: 4px 5px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-family: var(--font-family);
+  }
+
+button:hover {
+    box-shadow: 1px 2px 5px rgb(59, 59, 59);
+}
