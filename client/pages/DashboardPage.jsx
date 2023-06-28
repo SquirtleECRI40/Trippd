@@ -11,13 +11,13 @@ function DashboardPage() {
   const [trips, setTrips] = useState([]);
 
   async function getData() {
-    const res = await axios.get(`/api/tripDashboard/${user}`);
+    const res = await axios.get(`/api/trip/${username}`);
     const data = res.data;
     setTrips(data);
   }
 
   useEffect(() => {
-    //getData();
+    getData();
     // setTrips(['here']);
   }, []);
 

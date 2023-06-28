@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 
@@ -8,12 +8,13 @@ import TripModal from '../../pages/TripModal.jsx';
 Modal.setAppElement('#root');
 
 const TripCard = (props) => {
+  console.log('PROPS IS:', props);
   const [isOpen, setIsOpen] = useState(false);
 
   //destructure props
   //TO DO: do I need to get description for modal here?? or somewhere else
   const { _id, name, start_Location, location, start_Date, end_Date, notes } =
-    props;
+    props.trip;
 
   const openModal = () => {
     setIsOpen(true);
@@ -24,7 +25,7 @@ const TripCard = (props) => {
   };
 
   return (
-    <div className='trip-card'>
+    <div className="trip-card">
       <h3>{name}</h3>
       <h3>
         {start_Location} to {location}
@@ -32,17 +33,17 @@ const TripCard = (props) => {
       <h3>
         {start_Date} to {end_Date}
       </h3>
-      <button onClick={openModal} className='details-button'>
+      <button onClick={openModal} className="details-button">
         More Details
       </button>
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
-        contentLabel='Example Modal'
+        contentLabel="Example Modal"
       >
         <TripModal
-          className='trip-modal'
-          _id = {_id}
+          className="trip-modal"
+          _id={_id}
           closeModal={closeModal}
           name={name}
           startLocation={start_Location}
