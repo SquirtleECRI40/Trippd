@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import Modal from 'react-modal';
 import axios from 'axios';
 
 const TripModal = (props) => {
@@ -159,3 +160,5 @@ const TripModal = (props) => {
     </div>
   );
 };
+
+export default TripModal;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 
 //import pages
-import TripModal from './pages/TripModal.jsx';
+import TripModal from '../../pages/TripModal.jsx';
 
 Modal.setAppElement('#root');
 

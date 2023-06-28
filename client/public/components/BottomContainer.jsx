@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import TripCard from './TripCard.jsx';
 
 function BottomContainer(data) {
+  const {username} = useParams();
   //array to contain all trip cards
   const tripsArray = [];
 
@@ -14,7 +15,7 @@ function BottomContainer(data) {
   return data.data.length === 0 ? (
     <div>
       <p>Create trip to get started!</p>
-      <Link to="/createTrip" className="create" id="create">
+      <Link to={`/createTrip/${username}`} className="create" id="create">
         <button className="newTripButton" id="newTripButton">
           Create New Trip
         </button>

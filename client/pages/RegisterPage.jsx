@@ -22,7 +22,6 @@ function RegisterPage() {
         },
         body: JSON.stringify({ username: username, password: password }),
       });
-
       if (!response.ok) throw new Error('Username is already taken');
       else if (response.ok) {
         navigate(`/tripDashboard/${username}`);

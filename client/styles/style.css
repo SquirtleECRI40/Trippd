@@ -13,7 +13,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: auto;
     background: linear-gradient(315deg, rgb(200, 200, 200) 3%, var(--baseblue) 38%, rgb(1, 8, 212) 98%);
-    animation: gradient 30s ease infinite;
+    animation: gradient 10s ease infinite;
     background-size: 300% 200%;
     background-attachment: fixed;
 }
