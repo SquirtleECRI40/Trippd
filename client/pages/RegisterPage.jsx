@@ -22,7 +22,7 @@ function RegisterPage() {
 
       if (!response.ok) throw new Error('Username is already taken');
       else if (response.ok) {
-        navigate('/dashboard');
+        navigate(`/tripDashboard/${username}`);
       }
     } catch (err) {
       console.log('Error:', err);
