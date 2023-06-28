@@ -12,10 +12,10 @@ function TopContainer(data) {
   return data.data.length === 0 ? (
     <p>Hi {username}, welcome to Trippd!</p>
   ) : (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
       <p>Hi {username}, welcome back!</p>
       <div>
-        <p>New Trip???</p>
+        <p style={{font: 'strong'}}>New Trip???</p>
         {/* <Link to = {`/createTrip/${username}`} className="create" id="create"> */}
         <button className="newTripButton" id="newTripButton" onClick = {() => {navigate(`/createTrip/${username}`);}}>
             Create New Trip
