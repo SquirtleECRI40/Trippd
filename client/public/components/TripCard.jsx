@@ -13,7 +13,7 @@ const TripCard = (props) => {
 
   //destructure props
   //TO DO: do I need to get description for modal here?? or somewhere else
-  const { _id, name, start_Location, location, start_Date, end_Date, notes } =
+  const { _id, title, start_location, location, start_date, end_date, notes } =
     props.trip;
 
   const openModal = () => {
@@ -26,12 +26,12 @@ const TripCard = (props) => {
 
   return (
     <div className="trip-card">
-      <h3>{name}</h3>
+      <h3>{title}</h3>
       <h3>
-        {start_Location} to {location}
+        {start_location} to {location}
       </h3>
       <h3>
-        {start_Date} to {end_Date}
+        {start_date} to {end_date}
       </h3>
       <button onClick={openModal} className="details-button">
         More Details
@@ -45,11 +45,11 @@ const TripCard = (props) => {
           className="trip-modal"
           _id={_id}
           closeModal={closeModal}
-          name={name}
-          startLocation={start_Location}
+          name={title}
+          startLocation={start_location}
           endLocation={location}
-          startDate={start_Date}
-          endDate={end_Date}
+          startDate={start_date}
+          endDate={end_date}
           notes={notes}
         />
       </Modal>{' '}
