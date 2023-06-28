@@ -80,7 +80,7 @@ function CreateTripPage(){
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ tripTitle: tripTitle, startDate: startDate, endDate: endDate, startLocation: startLocation, location: location, notes: notes  }),
+        body: JSON.stringify({ title: tripTitle, start_location: startLocation, location: location, start_date: startDate, end_date: endDate, notes: notes  }),
       });
       if (!response.ok) throw new Error ('Unable to submit form');
       navigate('/tripDashboard');

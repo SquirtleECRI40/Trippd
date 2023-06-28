@@ -19,3 +19,5 @@ const TripCard = (props) => {
     </div>
   );
 };
+
+export default TripCard;
