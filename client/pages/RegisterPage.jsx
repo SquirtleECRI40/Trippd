@@ -7,12 +7,15 @@ import { useNavigate } from 'react-router-dom';
 function RegisterPage() {
   // logic to create new user based on data
   const navigate = useNavigate();
+
   const newUser = async () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    console.log(username);
+    console.log(password);
 
     try {
-      const response = await fetch('api/user/register', {
+      const response = await fetch('api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,7 +25,7 @@ function RegisterPage() {
 
       if (!response.ok) throw new Error('Username is already taken');
       else if (response.ok) {
-        navigate('/dashboard');
+        navigate(`/tripDashboard/${username}`);
       }
     } catch (err) {
       console.log('Error:', err);
@@ -32,9 +35,9 @@ function RegisterPage() {
   return (
     <div className="register">
       <div className="registerInput">
-        <p id="username">Username</p>
+        <p id="user">Username</p>
         <input type="text" name="username" id="username" />
-        <p id="password">Password</p>
+        <p id="pass">Password</p>
         <input type="text" name="password" id="password" />
         <button
           className="newUserButton"

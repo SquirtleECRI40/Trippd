@@ -9,7 +9,7 @@ import DashboardPage from './pages/DashboardPage.jsx';
 import CreateTripPage from './pages/CreateTripPage.jsx';
 
 //TO DO: Could be redundant
-// import Public from './public';
+import Public from './public/components/TripCard.jsx';
 
 //importing pages and components REQUIRED FOR ALL REACT COMPONENTS AND PAGES
 //usage: import <your page> from <file path>;
@@ -24,15 +24,14 @@ const App = () => {
         {/* INPUT ROUTES HERE */}
         {/* EXAMPLE: <Route path="/" element={<HomePage />} />  */}
         {/* TODO: CURRENT PAGES ARE STAND IN NAMES */}
-        <Route path = "/" element = {<SplashPage />} />
-        <Route path = "/login" element = {<LoginPage />} />
-        <Route path = "/register" element = {<RegisterPage />} />
-        <Route path = "/tripDashboard" element = {<DashboardPage/>} />
-        <Route path = "/createTrip" element = {<CreateTripPage/>} />
+        <Route path="/" element={<SplashPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/tripDashboard/:username" element={<DashboardPage />} />
+        <Route path="/createTrip" element={<CreateTripPage />} />
       </Routes>
     </>
   );
 };
-
 
 export default App;

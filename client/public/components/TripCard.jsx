@@ -25,7 +25,7 @@ const TripCard = (props) => {
   };
 
   return (
-    <div className='trip-card'>
+    <div className="trip-card">
       <h3>{name}</h3>
       <h3>
         {startLocation} to {endLocation}
@@ -40,8 +40,8 @@ const TripCard = (props) => {
         contentLabel="Example Modal"
       >
         <TripModal className = "trip-modal" closeModal = {closeModal} name = {name} startLocation = {startLocation} endLocation = {endLocation} startDate={startDate} endDate={endDate} notes={notes}/>
-      </Modal>
-    
-    </div>
+      </Modal>    </div>
   );
 };
+
+export default TripCard;

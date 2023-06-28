@@ -1,49 +1,40 @@
 const express = require('express');
-// const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
 
 const app = express();
 
+const tripRouter = require('./routes/tripRoutes');
+const usersRouter = require('./routes/userRoutes');
 // assign constants
 const PORT = 3000;
-const mongoURI = '';
-
-// connect to mongo database
-// if (mongoURI) mongoose.connect(mongoURI, { dbName: 'test'});
-
-// require routers
-const apiRouter = require('./routes/api.js');
 
 // parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
-// route handlers
-app.use('/api', apiRouter);
+//request to router
+app.use('/api/trip', tripRouter);
+app.use('/api/users', usersRouter);
 
-// unknown route handler
-app.use('*', (req, res) => {
-  return res.status(404).send('404 Not Found');
-});
+//catch-all route handler for any requests
 
-// global error handler
-app.use((err, req, res, next) => { /* eslint-disable-line */
-  const defaultError = {
-    log: `Express caught an unknown middleware error: ${err}`,
-    status: 500,
-    message: 'Internal Server Error',
+app.use((req, res) => {res.status(404).send('This page does not exist')});
+
+//express error handler
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 400,
+    message: { err: 'An error occurred' },
   };
-  
-  const { log, status, message } = Object.assign({}, defaultError, err);
-
-  console.log(log);
-  return res.status(status).send(message);
+  const errorObj = Object.assign({}, defaultErr, err);
+  console.log(errorObj.log);
+  return res.status(errorObj.status).json(errorObj.message);
 });
 
 // start server
+
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}!`);
+  console.log(`Server listening on port: ${PORT}...`);
 });
 
 module.exports = app;
