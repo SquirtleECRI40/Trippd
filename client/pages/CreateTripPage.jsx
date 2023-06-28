@@ -6,12 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import '../styles/createTrip.css';
 import axios from 'axios';
+import moment from 'moment';
 
 
 function CreateTripPage(){
-//   const navigate = useNavigate();
-//   const [startDate, setStartDate] = useState(null);
-//   const [endDate, setEndDate] = useState(null);
+  const navigate = useNavigate();
+  //   const [startDate, setStartDate] = useState(null);
+  //   const [endDate, setEndDate] = useState(null);
   //   const [tripTitle, setTripTitle] = useState(null);
   //   const [startLocation, setStartLocation] = useState(null);
   //   const [location, setLocation] = useState(null);
@@ -66,12 +67,25 @@ function CreateTripPage(){
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = async(data) => {
+    // console.log(data);
+    //   prints out like this: {tripTitle: 'ttutu', startDateTime: '2023-06-15T09:33', endDateTime: '2023-06-09T09:34', startLocation: 'tuut', location: 'utut', …}
+    const {tripTitle, startDateTime, endDateTime, startLocation, location, notes} = data;
+    let startDate = data.startDateTime.slice(0, 10);
+    // let startTime = moment(data.startDateTime.slice(11), ['HH:mm']).format('h:mm A');
+    let endDate = data.endDateTime.slice(0, 10);
+    // let endTime = moment(data.endDateTime.slice(11), ['HH:mm']).format('h:mm A');
     try {
-      console.log(data);
-      const {tripTitle, startDate, endDate, startLocation, location, notes} = data;
-    //   const formattedStartDate = 
-
-    }catch(err){
+      const response = await fetch('api/trip/createTrip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tripTitle: tripTitle, startDate: startDate, endDate: endDate, startLocation: startLocation, location: location, notes: notes  }),
+      });
+      if (!response.ok) throw new Error ('Unable to submit form');
+      navigate('/tripDashboard');
+    }
+    catch(err){
       console.log('Error in submitting form: ', err);
     }
   };
@@ -82,10 +96,10 @@ function CreateTripPage(){
         <input type="text" placeholder="Trip Title" {...register('tripTitle', {required: true})} />
         {/* <DatePicker label="Start" value={startDate} onChange={(newValue)=> setStartDate(newValue)}/>
         <DatePicker label = "End" value={endDate} onChange={(newValue)=> setEndDate(newValue)}/> */}
-        <input type="datetime-local" placeholder="Start Date" {...register('startDate', {required: true})} />
-        <input type="datetime-local" placeholder="End Date" {...register('endDate', {required: true})} />
+        <input type="datetime-local" placeholder="Start Date" {...register('startDateTime', {required: true})} />
+        <input type="datetime-local" placeholder="End Date" {...register('endDateTime', {required: true})} />
         <input type="text" placeholder="Flying From" {...register('startLocation', {required: true})} />
-        <input type="text" placeholder="Flying To" {...register('location', {required: true})} />
+        <input type="text" placeholder="Flying To" {...register('endLocation', {required: true})} />
         <input id = "notes" type="text" placeholder="Notes" {...register('notes', {required: true})} />
         {/* needs to be "Submit" otherwise the form creator won't work */}
         <input type="Submit" />
