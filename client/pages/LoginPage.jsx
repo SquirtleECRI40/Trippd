@@ -12,7 +12,7 @@ function LoginPage() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     try {
-      const response = await fetch('api/user/login', {
+      const response = await fetch('api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,7 +22,6 @@ function LoginPage() {
 
       if (!response.ok) throw new Error('Incorrect username or password');
       else if (response.ok) {
-
         // console.log(user);
         // setUser(username);
         // console.log(user);
