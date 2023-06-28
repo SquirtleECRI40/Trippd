@@ -17,8 +17,7 @@ function TopContainer(data) {
       <div>
         <p>New Trip???</p>
         {/* <Link to = {`/createTrip/${username}`} className="create" id="create"> */}
-        {/* <button className="newTripButton" id="newTripButton" onClick = {() => {navigate(`/createTrip/${username}`);}}> */}
-        <button className="newTripButton" id="newTripButton" onClick = {() => {navigate(`/${username}/create`);}}>
+        <button className="newTripButton" id="newTripButton" onClick = {() => {navigate(`/createTrip/${username}`);}}>
             Create New Trip
         </button>
         {/* </Link> */}

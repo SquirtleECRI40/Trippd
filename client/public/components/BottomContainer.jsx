@@ -16,8 +16,7 @@ function BottomContainer(data) {
   return data.data.length === 0 ? (
     <div>
       <p>Create trip to get started!</p>
-      {/* <Link to={`/createTrip/${username}`} className="create" id="create"> */}
-      <Link to={`tripDashboard/${username}/create`} className="create" id="create">
+      <Link to={`/createTrip/${username}`} className="create" id="create">
         <button className="newTripButton" id="newTripButton">
           Create New Trip
         </button>

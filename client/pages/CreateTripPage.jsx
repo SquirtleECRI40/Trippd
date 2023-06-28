@@ -18,13 +18,11 @@ function CreateTripPage(){
   const onSubmit = async(data) => {
     const {tripTitle, startDateTime, endDateTime, startLocation, location, notes} = data;
     let startDate = data.startDateTime.slice(0, 10);
-    // let startTime = moment(data.startDateTime.slice(11), ['HH:mm']).format('h:mm A');
     let endDate = data.endDateTime.slice(0, 10);
-    // let endTime = moment(data.endDateTime.slice(11), ['HH:mm']).format('h:mm A');
     console.log(data);
     try {
-    //   const response = await fetch(`api/trip/createTrip/${username}`, {
-      const response = await fetch(`api/trip/${username}/create`, {
+    //   const response = await fetch(`http://localhost:8080/createTrip/createTrip/${username}/api/trip/createTrip/${username}`, {
+      const response = await fetch(`/api/trip/createTrip/${username}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,8 +32,8 @@ function CreateTripPage(){
       console.log(response.status);
       //   if (!response.ok) throw new Error ('Unable to submit form');
       console.log('before navigate');
-      console.log('username in create trip page: ', username);
       navigate(-1);
+      console.log('username in create trip page: ', username);
     }
     catch(err){
       console.log('Error in submitting form: ', err);
@@ -51,7 +49,7 @@ function CreateTripPage(){
         <input type="datetime-local" placeholder="Start Date" {...register('startDateTime')} />
         <input type="datetime-local" placeholder="End Date" {...register('endDateTime')} />
         <input type="text" placeholder="Flying From" {...register('startLocation', {required: true})} />
-        <input type="text" placeholder="Flying To" {...register('endLocation', {required: true})} />
+        <input type="text" placeholder="Flying To" {...register('location', {required: true})} />
         <input id = "notes" type="text" placeholder="Notes" {...register('notes')} />
         {/* needs to be "Submit" otherwise the form creator won't work */}
         {/* <button>Cancel</button> */}

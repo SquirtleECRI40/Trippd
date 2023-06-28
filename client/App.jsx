@@ -28,8 +28,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/tripDashboard/:username" element={<DashboardPage />} />
-        {/* <Route path="/createTrip/:username" element={<CreateTripPage />} /> */}
-        <Route path="tripDashboard/:username/create" element={<CreateTripPage />} />
+        <Route path="/createTrip/:username" element={<CreateTripPage />} />
       </Routes>
     </>
   );
