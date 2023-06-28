@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 
@@ -13,6 +13,7 @@ const TripModal = (props) => {
     endDate,
     notes,
   } = props;
+  console.log('PROPS ARE', props);
 
   //setting up hooks
   const [isEditMode, setIsEditMode] = useState(false);
@@ -46,7 +47,7 @@ const TripModal = (props) => {
       notes: editedNotes,
     };
     try {
-      const response = await axios.put(`/api/trip/update${_id}`,updatedTrip);
+      const response = await axios.put(`/api/trip/update${_id}`, updatedTrip);
       if (response.ok) {
         setIsEditMode(false);
       } else {
@@ -94,7 +95,7 @@ const TripModal = (props) => {
           <p>
             <strong>Notes:</strong> {notes}
           </p>
-          <button onClick={handleEditClick} className='edit-button'>
+          <button onClick={handleEditClick} className="edit-button">
             Edit
           </button>
         </>
@@ -103,7 +104,7 @@ const TripModal = (props) => {
           <p>
             <strong>Name:</strong>{' '}
             <input
-              type='text'
+              type="text"
               value={editedName}
               onChange={(e) => setEditedName(e.target.value)}
             />
@@ -111,7 +112,7 @@ const TripModal = (props) => {
           <p>
             <strong>Start Location:</strong>{' '}
             <input
-              type='text'
+              type="text"
               value={editedStartLocation}
               onChange={(e) => setEditedStartLocation(e.target.value)}
             />
@@ -119,7 +120,7 @@ const TripModal = (props) => {
           <p>
             <strong>End Location:</strong>{' '}
             <input
-              type='text'
+              type="text"
               value={editedEndLocation}
               onChange={(e) => setEditedEndLocation(e.target.value)}
             />
@@ -127,7 +128,7 @@ const TripModal = (props) => {
           <p>
             <strong>Start Date:</strong>{' '}
             <input
-              type='text'
+              type="text"
               value={editedStartDate}
               onChange={(e) => setEditedStartDate(e.target.value)}
             />
@@ -135,7 +136,7 @@ const TripModal = (props) => {
           <p>
             <strong>End Date:</strong>{' '}
             <input
-              type='text'
+              type="text"
               value={editedEndDate}
               onChange={(e) => setEditedEndDate(e.target.value)}
             />
@@ -147,11 +148,11 @@ const TripModal = (props) => {
               onChange={(e) => setEditedNotes(e.target.value)}
             ></textarea>
           </p>
-          <div className='edit-buttons'>
-            <button onClick={handleConfirmClick} className='confirm-button'>
+          <div className="edit-buttons">
+            <button onClick={handleConfirmClick} className="confirm-button">
               Confirm
             </button>
-            <button onClick={handleCancelClick} className='cancel-button'>
+            <button onClick={handleCancelClick} className="cancel-button">
               Cancel
             </button>
           </div>
