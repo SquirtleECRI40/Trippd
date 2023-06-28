@@ -17,8 +17,8 @@ function DashboardPage() {
   }
 
   useEffect(() => {
-    console.log('******THIS IS THE:', username);
     //getData();
+    // setTrips(['here']);
   }, []);
 
   return (
