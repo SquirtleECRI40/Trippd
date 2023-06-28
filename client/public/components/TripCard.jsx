@@ -25,7 +25,7 @@ const TripCard = (props) => {
   };
 
   return (
-    <div className="trip-card">
+    <div className="trip-card" style={{border: '1px solid blue', borderRadius: '5px', flexWrap: 'wrap'}}>
       <h3>{name}</h3>
       <h3>
         {start_Location} to {location}
