@@ -2,8 +2,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import TopContainer from './public/components/TopContainer.jsx';
-import BottomContainer from './public/components/BottomContainer.jsx';
+import TopContainer from '../public/components/TopContainer.jsx';
+import BottomContainer from '../public/components/BottomContainer.jsx';
 
 function DashboardPage() {
   const { username } = useParams();
@@ -18,7 +18,7 @@ function DashboardPage() {
 
   useEffect(() => {
     console.log('******THIS IS THE:', username);
-    getData();
+    //getData();
   }, []);
 
   return (
